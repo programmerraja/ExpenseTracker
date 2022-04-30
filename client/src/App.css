@@ -18,10 +18,12 @@ body {
   margin: 0;
   font-family: 'Lato', sans-serif;
 }
-
+#root{
+  width: 90vw;
+}
 .container {
   margin: 30px auto;
-  width: 350px;
+  width: 100%;
 }
 
 h1 {
