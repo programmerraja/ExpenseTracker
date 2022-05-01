@@ -1,26 +1,30 @@
 import React from 'react';
-import { Header } from './components/Header';
-import { Balance } from './components/Balance';
-import { IncomeExpenses } from './components/IncomeExpenses';
-import { TransactionList } from './components/TransactionList';
-import { AddTransaction } from './components/AddTransaction';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate
+} from 'react-router-dom';
 
-import { GlobalProvider } from './context/GlobalState';
+
+import Home from "./pages/Home";
+import Signin from "./pages/Signin";
+
+import API from "./utils/API";
+
+
 
 import './App.css';
 
 function App() {
   return (
-    <GlobalProvider>
-      <Header />
-      <div className="container">
-        <Balance />
-        <IncomeExpenses />
-        <TransactionList />
-        <AddTransaction />
-        <p className='footer'>Save Money Selvam</p>
-      </div>
-    </GlobalProvider>
+    <Router>
+      <Routes>
+      <Route exact  path={"/"} element={<Signin/>}/>
+        <Route exact path={"/home"} element={<Home/>}/>
+        <Route exact  path={"/signin"} element={<Signin/>}/>
+      </Routes>
+    </Router>
   );
 }
 
