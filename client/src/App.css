@@ -1,15 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
 :root {
+}
+:root{
+	--primary-color:#0ab377;
+	--secondary-color:#152251;
+  --secondary-color-light:#182045;
+  --secondary-color-lightr:rgba(24,32,69,0.7);
+  --secondary-color-input:#152248;
+  --font-color: white;
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
-
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #f7f7f7;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,6 +24,7 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: 'Lato', sans-serif;
+  /* color: var(--font-color); */
 }
 #root{
   width: 90vw;
@@ -43,7 +51,7 @@ h4 {
 }
 
 .inc-exp-container {
-  background-color: #fff;
+  background-color:white;
   box-shadow: var(--box-shadow);
   padding: 20px;
   display: flex;
@@ -67,7 +75,7 @@ h4 {
 }
 
 .money.plus {
-  color: #2ecc71;
+  color: #6b2ecc;
 }
 
 .money.minus {
@@ -154,4 +162,33 @@ input[type='number'] {
 .footer{
   text-align: center;
   font-weight: bold;
+}
+
+
+
+.swal-modal,
+.swal-icon{
+  background-color:rgba(21,34,81,0.8);
+  color: var(--font-color);
+}
+.swal-icon{
+  display: none;
+}
+
+.swal-title,
+.swal-text{
+  color: var(--font-color);
+}
+
+.swal_text{
+  margin: 0;
+}
+.swal-button{
+  background-color: var(--primary-color);
+  border-radius: 0.2rem;
+  outline: none;
+  box-shadow: none;
+}
+.swal-button:hover{
+  box-shadow: none;
 }
