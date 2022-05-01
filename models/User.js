@@ -56,4 +56,4 @@ const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
 module.exports = User;
 
-User.create({name:"selvam",email:"sraj@gmail.com",password:"sraj@gmail.com"}).then(a=>console.log(a))
+// User.create({name:"selvam",email:"sraj@gmail.com",password:"sraj@gmail.com"}).then(a=>console.log(a))
