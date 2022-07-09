@@ -1,0 +1,31 @@
+.TransactionForm{
+    width: 300px;
+    min-height: 200px;
+    padding: 0.5rem;
+    box-shadow: var(--box-shadow);
+    background-color: white;
+}
+.TransactionFormType{
+    display: flex;
+    justify-content: space-around;
+}
+.TransactionFormType p{
+    padding: 0.5rem;
+    cursor: pointer;
+    width: 48%;
+    transition: all 1s;
+}
+.selected{
+    background-color: #6d71e8;
+
+}
+.TransactionFormValue{
+    display: flex;
+    flex-direction:column ;
+}
+.TransactionFormValue p,input{
+    margin: 0.5rem;
+}
+.TransactionFormValue input{
+    height: 40px;
+}

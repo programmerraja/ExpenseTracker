@@ -1,6 +1,8 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
+import userService from "./userService";
+import companyService from "./companyService";
 
 
 export default {
@@ -54,35 +56,7 @@ export default {
     return null;
   },
 
-  signIn: function (userCred) {
-    return axios.post("/api/v1/signin/",userCred);
-  },
-  
-  getMonths:function(){
-    return axios.get("/api/v1/month/");
-  },
-  editMonth:function(id,body){
-    return axios.post(`/api/v1/month/${id}`,body);
-  },
-  addMonth:function(body){
-    return axios.post("/api/v1/month/",body);
-  },
-  deleteMonth:function(id){
-    return axios.delete(`/api/v1/month/${id}`);
-  },
-
-  getTransactions:function(id){
-    return axios.get(`/api/v1/transactions/${id}`);
-  },
-  addTransaction:function(body){
-    return axios.post("/api/v1/transactions/",body);
-  },
-  editTransaction:function(body){
-    return axios.post(`/api/v1/transactions/edit`,body);
-  },
-  deleteTransaction:function(body){
-    return axios.post(`/api/v1/transactions/delete`,body);
-  }
+  signIn:userService.signIn,
  
 };
 

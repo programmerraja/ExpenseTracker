@@ -7,12 +7,10 @@ import {
 } from 'react-router-dom';
 
 
-import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import ExpenseDetail from "./pages/ExpenseDetail";
+
 import Signin from "./pages/Signin";
-
-import API from "./utils/API";
-
-
 
 import './App.css';
 
@@ -20,8 +18,8 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route exact  path={"/"} element={<Signin/>}/>
-        <Route exact path={"/home"} element={<Home/>}/>
+        <Route exact path={"/"} element={<Dashboard/>}/>
+        <Route exact path={"/transaction/:monthId"} element={<ExpenseDetail/>}/>
         <Route exact  path={"/signin"} element={<Signin/>}/>
       </Routes>
     </Router>

@@ -16,6 +16,8 @@ dotenv.config({ path: './.env' });
 connectDB();
 
 const transactions = require('./routes/transactions');
+const month = require('./routes/month');
+
 const user = require('./routes/user');
 
 const app = express();
@@ -28,6 +30,8 @@ if(process.env.NODE_ENV === 'development') {
 app.use('/api/v1/signin',user);
 
 app.use('/api/v1/transactions',auth.isAuthenticatedUser() ,transactions);
+app.use('/api/v1/month',auth.isAuthenticatedUser() ,month);
+
 
 
 if(process.env.NODE_ENV === 'production') {

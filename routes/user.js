@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { Signin } = require('../controllers/transactions');
+const { signin } = require('../controllers/user');
 
 router
   .route('/')
-  .post(Signin);
-
+  .post(signin);
 
 module.exports = router;

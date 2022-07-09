@@ -34,12 +34,12 @@ function Signin(){
             if(res.data.status==="success"){
               API.setToken(res.data.token);
               API.setAuthHeader();
-              history("/home");
+              history("/dashboard");
             }
             
           })
           .catch((res)=>{
-             console.log(res,"ghjkl")
+            //  console.log(res,"ghjkl")
              res=res.response;
              setLoading(false);
              errorHandler(true,res.data.msg);

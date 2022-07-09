@@ -1,0 +1,35 @@
+const mongoose = require('mongoose');
+const { String,Number ,ObjectId} = mongoose.Schema.Types;
+
+const MonthSchema = new mongoose.Schema({
+  userId:{
+    type: ObjectId,
+    ref: "User"
+  },
+  name: {
+    type: String,
+    trim: true, 
+    required:true
+  },
+  note: {
+    type: String,
+  },
+  income:{
+    type:Number,
+    required:true
+  },
+  balance:{
+    type:Number,
+  },
+  expense:{
+    type:Number,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const Month= mongoose.model('Month', MonthSchema);
+module.exports= Month;
+

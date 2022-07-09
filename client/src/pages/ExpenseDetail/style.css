@@ -1,0 +1,70 @@
+.expenseDetail{
+    position: relative;
+    width: 90%;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    margin: auto;
+    padding: 1rem;
+    min-height: 100vh;
+}
+.expenseBalance{
+    text-align: center;
+}
+.expenseIncome {
+    background-color:white;
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.expenseIncome > div {
+    flex: 1;
+    text-align: center;
+}
+  
+.expenseIncome > div:first-of-type {
+    border-right: 1px solid #dedede;
+  }
+  
+.money {
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 5px 0;
+}
+  
+.money.plus {
+    color: #6b2ecc;
+}
+  
+.money.minus {
+    color: #c0392b;
+}
+  
+.addIcon{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 40px;
+}
+.transaction{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;    
+}
+.transaction ul{
+    margin: 0;
+    list-style: none;
+}
+.transaction ul li{
+    display: flex;
+    justify-content: space-between;
+    margin: 0.3rem;
+    padding: 0.3rem 0; 
+    background-color: aliceblue;
+}
+
+.transactionIcons i{
+    margin: 0 0.5rem ;
+    cursor: pointer;
+}
