@@ -34,7 +34,7 @@ function Signin(){
             if(res.data.status==="success"){
               API.setToken(res.data.token);
               API.setAuthHeader();
-              history("/dashboard");
+              history("/");
             }
             
           })

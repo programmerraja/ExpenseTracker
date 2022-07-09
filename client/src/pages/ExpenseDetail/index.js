@@ -37,18 +37,18 @@ function ExpenseDetail() {
     let expense=month.expense,balance=month.balance,income=month.income;
     if(type==="EXPENSE" ){
         if(isAdd){
-            expense=month.expense>=0?parseInt(month.expense)+parseInt(amount):amount
+            expense=month.expense!==undefined?parseInt(month.expense)+parseInt(amount):amount
             balance=parseInt(month.balance)-parseInt(amount)
         }else{
-            expense=month.expense>0?parseInt(month.expense)-parseInt(amount):amount
+            expense=month.expense!==undefined?parseInt(month.expense)-parseInt(amount):amount
             balance=parseInt(month.balance)+parseInt(amount)
         }
    }else{
         if(isAdd){
-            income=month.income>0?parseInt(month.income)+parseInt(amount):amount
+            income=month.income!==undefined?parseInt(month.income)+parseInt(amount):amount
             balance=parseInt(month.balance)+parseInt(amount)
         }else{
-            income=month.income>0?parseInt(month.income)-parseInt(amount):amount
+            income=month.income!==undefined?parseInt(month.income)-parseInt(amount):amount
             balance=parseInt(month.balance)-parseInt(amount)   
         }
    }
@@ -124,23 +124,24 @@ function showEdit(transaction){
 }
   return (
     <>
-      <i class="fa-solid fa-circle-plus addIcon" onClick={()=>{setIsTransactionForm(true)}}></i>
+      
       <SquareLoader  loading={loading} msg={"Please wait we getting data"}/>
       {isTransactionForm && <TransactionForm amount={amount}  type={type} note={note} setAmount={setAmount} setType={setType} setNote={setNote} onAdd={onAdd} onClose={()=>setIsTransactionForm(false)} isEdit={isEdit}/>}
       <div className="expenseDetail">
+         <i class="fa-solid fa-circle-plus addIcon" onClick={()=>{setIsTransactionForm(true)}}></i>
         <div className="expenseBalance">
           <h4>Your Balance</h4>
-          <h1>{month.balance ?month.balance : month.income}</h1>
+          <h1>{API.numberWithCommas(month.balance!==undefined ?month.balance : month.income)}</h1>
         </div>
 
         <div className="expenseIncome">
           <div>
             <h4>Income</h4>
-            <p className="money plus">{month.income}</p>
+            <p className="money plus">{API.numberWithCommas(month.income)}</p>
           </div>
           <div>
             <h4>Expense</h4>
-            <p className="money minus">{month.expense?month.expense:0}</p>
+            <p className="money minus">{API.numberWithCommas(month.expense?month.expense:0)}</p>
           </div>
         </div>
         {!loading && 
@@ -151,7 +152,7 @@ function showEdit(transaction){
                     if(transaction.type==="INCOME"){
                         return (
                             <li>
-                                {transaction.amount} {"->"} {transaction.note}
+                                {API.numberWithCommas(transaction.amount)} {"->"} {transaction.note}
                                 <div className="transactionIcons">
                                     <i class="fas fa-edit" onClick={()=>{showEdit(transaction)}}></i>
                                     <i class="fa-solid fa-trash-can" onClick={()=>onDeleteTransaction(transaction)}></i>   
@@ -166,7 +167,7 @@ function showEdit(transaction){
                     if(transaction.type==="EXPENSE"){
                         return (
                             <li>
-                                {transaction.amount} {"->"} {transaction.note}
+                                {API.numberWithCommas(transaction.amount)} {"->"} {transaction.note}
                                 <div className="transactionIcons">
                                     <i class="fas fa-edit" onClick={()=>{showEdit(transaction)}}></i>
                                     <i class="fa-solid fa-trash-can" onClick={(event)=>onDeleteTransaction(transaction)}></i>   

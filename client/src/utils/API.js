@@ -82,8 +82,13 @@ export default {
   },
   deleteTransaction:function(body){
     return axios.post(`/api/v1/transactions/delete`,body);
+  },
+  numberWithCommas:function (x) {
+    if(x){
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    return x
   }
- 
 };
 
 function setAuthHeader() {

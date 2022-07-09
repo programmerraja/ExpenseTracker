@@ -29,6 +29,7 @@ let dummydata=[{
 function Dashboard(){
 
     const [loading,setLoading]=useState(true);
+    const [searchText,setSearchtext]=useState("")
     const [transactionMonths,setTransactionMonths]=useState([]);
     const [month,setMonth]=useState();
     const [income,setIncome]=useState();
@@ -61,16 +62,21 @@ function Dashboard(){
         
     }
     return (
-        <>
+        <>  
             <SquareLoader  loading={loading} msg={"Please wait we getting data"}/>
             <div className='dashboard'>
+                 <i class="fa-solid fa-circle-plus addIcon" onClick={()=>{setIsMonthForm(true)}}></i>
+                <h1 className='dashboardTitle'>Expense Tracker</h1>
                 {isMonthForm && <MonthForm month={month}  income={income} note={note} setMonth={setMonth} setIncome={setIncome} setNote={setNote} onAdd={onAdd} onClose={()=>setIsMonthForm(false)}/>}
                 <div className='header'>
-                    <input type='text' placeholder='Search by month..'/>
-                    <input type='button' value="create" onClick={()=>setIsMonthForm(true)}/>
+                    <input type='text' placeholder='Search by month..' value={searchText} onChange={(e)=>setSearchtext(e.target.value)}/>
                 </div>
                 <div className='month_cards'>
-                        {transactionMonths.map((transaction)=><MonthCard {...transaction}/>)}
+                        {transactionMonths.map((transaction)=>{
+                            if(transaction.ishidden){
+                                return <MonthCard {...transaction}/>
+                            }
+                        })}
                 </div>
             </div>
         </>
