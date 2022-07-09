@@ -39,6 +39,7 @@ function Dashboard(){
 
     useEffect(()=>{
         API.getMonths().then((res)=>{
+            console.log(res.data.data)
             setTransactionMonths(res.data.data);
             setLoading(false);
         })
@@ -59,24 +60,29 @@ function Dashboard(){
         }else{
             alert("Give all")
         }
-        
+    }
+    function onDelete(monthId){
+        API.deleteMonth(monthId).then((res)=>{
+            let newMonth=transactionMonths.filter((m)=>{if(m._id!==monthId){return m}})
+            setTransactionMonths(newMonth)
+        })
     }
     return (
         <>  
-            <SquareLoader  loading={loading} msg={"Please wait we getting data"}/>
+            <SquareLoader  loading={loading} msg={"Please wait we adding your data"}/>
             <div className='dashboard'>
                  <i class="fa-solid fa-circle-plus addIcon" onClick={()=>{setIsMonthForm(true)}}></i>
                 <h1 className='dashboardTitle'>Expense Tracker</h1>
-                {isMonthForm && <MonthForm month={month}  income={income} note={note} setMonth={setMonth} setIncome={setIncome} setNote={setNote} onAdd={onAdd} onClose={()=>setIsMonthForm(false)}/>}
+                {isMonthForm && <MonthForm month={month}  income={income} note={note} setMonth={setMonth} setIncome={setIncome} setNote={setNote} onAdd={onAdd} onClose={()=>setIsMonthForm(false)} />}
                 <div className='header'>
                     <input type='text' placeholder='Search by month..' value={searchText} onChange={(e)=>setSearchtext(e.target.value)}/>
                 </div>
                 <div className='month_cards'>
-                        {transactionMonths.map((transaction)=>{
-                            if(transaction.ishidden){
-                                return <MonthCard {...transaction}/>
-                            }
-                        })}
+                    {transactionMonths.map((transaction)=>{
+                        if(!transaction.ishidden){
+                            return <MonthCard {...transaction} onDelete={onDelete}/>
+                        }
+                    })}
                 </div>
             </div>
         </>

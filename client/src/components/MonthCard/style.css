@@ -10,3 +10,11 @@
 .month_card:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
+.footer{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem  0.5rem;
+}
+.footer i{
+    cursor: pointer;
+}
