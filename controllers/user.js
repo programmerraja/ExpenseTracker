@@ -1,3 +1,8 @@
+const {Transaction,Month} = require('../models/');
+
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 exports.signin=function (req, res, next) {
     return passport.authenticate(
