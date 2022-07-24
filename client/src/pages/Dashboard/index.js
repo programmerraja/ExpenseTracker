@@ -8,23 +8,6 @@ import errorHandler from "../../utils/errorHandler";
 import API from '../../utils/API';
 
 import "./style.css"
-let dummydata=[{
-    month:"June",
-    income:"2000",
-    spent:"3000",
-    saving:"5000",
-},{
-    month:"June",
-    income:"2000",
-    spent:"3000",
-    saving:"5000",
-},{
-    month:"June",
-    income:"2000",
-    spent:"3000",
-    saving:"5000",
-}
-]
 
 function Dashboard(){
 
@@ -34,6 +17,8 @@ function Dashboard(){
     const [month,setMonth]=useState();
     const [income,setIncome]=useState();
     const [note,setNote]=useState();
+    const [isEdit,setIsEdit]=useState(false);
+    const [monthId,setMonthId]=useState()
 
     const [isMonthForm,setIsMonthForm]=useState(false);
 
@@ -48,24 +33,46 @@ function Dashboard(){
     function onAdd(){
         if(month && income){
             setLoading(true);
-            API.addMonth({name:month,income,note}).then((res)=>{
-                setTransactionMonths([...transactionMonths,res.data.data]);
+            let apiProm;
+            if(!isEdit){
+                apiProm=API.addMonth({name:month,income,note})
+            }else{
+                apiProm=API.editMonth(monthId,{name:month,income,note})
+            }
+           
+            apiProm.then((res)=>{
+                if(!isEdit){
+                    setTransactionMonths([...transactionMonths,res.data.data]);
+                }else{
+                    setTransactionMonths([res.data.data]);
+                    setIsEdit(false)
+                }
                 setLoading(false);
                 setIsMonthForm(false);
                 setMonth("")
                 setIncome("")
                 setNote("")
-
             })
         }else{
             alert("Give all")
         }
     }
     function onDelete(monthId){
-        API.deleteMonth(monthId).then((res)=>{
-            let newMonth=transactionMonths.filter((m)=>{if(m._id!==monthId){return m}})
-            setTransactionMonths(newMonth)
-        })
+        let res=prompt("Did you really want to delete")
+        if(res){
+            API.deleteMonth(monthId).then((res)=>{
+                let newMonth=transactionMonths.filter((m)=>{if(m._id!==monthId){return m}})
+                setTransactionMonths(newMonth)
+            })
+        }
+    }
+
+    function showEdit(id,month,icome,note){
+        setIncome(icome);
+        setMonth(month);
+        setNote(note);
+        setMonthId(id);
+        setIsEdit(true)
     }
     return (
         <>  
@@ -73,14 +80,14 @@ function Dashboard(){
             <div className='dashboard'>
                  <i class="fa-solid fa-circle-plus addIcon" onClick={()=>{setIsMonthForm(true)}}></i>
                 <h1 className='dashboardTitle'>Expense Tracker</h1>
-                {isMonthForm && <MonthForm month={month}  income={income} note={note} setMonth={setMonth} setIncome={setIncome} setNote={setNote} onAdd={onAdd} onClose={()=>setIsMonthForm(false)} />}
+                {(isMonthForm || isEdit) && <MonthForm month={month}  income={income} note={note} setMonth={setMonth} setIncome={setIncome} setNote={setNote} onAdd={onAdd} onClose={()=>setIsMonthForm(false)} isEdit={isEdit} />}
                 <div className='header'>
                     <input type='text' placeholder='Search by month..' value={searchText} onChange={(e)=>setSearchtext(e.target.value)}/>
                 </div>
                 <div className='month_cards'>
                     {transactionMonths.map((transaction)=>{
                         if(!transaction.ishidden){
-                            return <MonthCard {...transaction} onDelete={onDelete}/>
+                            return <MonthCard {...transaction} onDelete={onDelete} showEdit={showEdit}/>
                         }
                     })}
                 </div>

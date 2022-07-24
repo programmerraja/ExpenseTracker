@@ -66,7 +66,7 @@ exports.editMonth = async (req, res, next) => {
     try {
       const { text, income,note } = req.body;
   
-      const month = await Month.findOneAndUpdate({_id:req.params.id,userId:req.user._id},{...req.body});
+      const month = await Month.findOneAndUpdate({_id:req.params.id,userId:req.user._id},{text, income,note});
     
       return res.status(201).json({
         success: true,

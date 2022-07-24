@@ -93,10 +93,11 @@ exports.editTransaction = async (req, res, next) => {
 // @access  Public
 exports.deleteTransaction = async (req, res, next) => {
   try {
-    console.log(req.body)
+    console.log(req.body,"dd")
     let {income,expense,balance}=req.body;
     const transaction = await Transaction.findOne({userId:req.user._id,_id:req.body.id});
-    const month=Month.findOneAndUpdate({_id:req.body.monthId,userId:req.user._id},{income,expense,balance})
+    const month=await Month.findOneAndUpdate({_id:req.body.monthId,userId:req.user._id},{income,expense,balance})
+    console.log(month,"dd")
     if(!transaction) {
       return res.status(404).json({
         success: false,

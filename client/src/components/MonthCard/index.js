@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import "./style.css"
 
- function MonthCard({_id,name,income,expense,note,balance,onDelete}){
+ function MonthCard({_id,name,income,expense,note,balance,onDelete,showEdit}){
     return (
         <div className='month_card'>
            
@@ -15,7 +15,7 @@ import "./style.css"
             <button >View</button>
            </Link>
            <div className='footer'>
-                <i class="fas fa-edit"  ></i>
+                <i class="fas fa-edit"  onClick={()=>{showEdit(_id,name,income,note)}} ></i>
                 <i class="fa-solid fa-trash-can" onClick={()=>{onDelete(_id)}}></i>   
             </div>
         </div>
