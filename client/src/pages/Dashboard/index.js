@@ -74,6 +74,18 @@ function Dashboard(){
         setMonthId(id);
         setIsEdit(true)
     }
+
+    function filterMonth(searchText){
+       let t= transactionMonths.map((transaction)=>{
+            if(transaction.name.toLowerCase().startsWith(searchText)){
+                transaction.ishidden=false;
+            }else{
+                transaction.ishidden=true;
+            }
+            return transaction;
+        })
+        setTransactionMonths(t);
+    }
     return (
         <>  
             <SquareLoader  loading={loading} msg={"Please wait we adding your data"}/>
@@ -82,7 +94,7 @@ function Dashboard(){
                 <h1 className='dashboardTitle'>Expense Tracker</h1>
                 {(isMonthForm || isEdit) && <MonthForm month={month}  income={income} note={note} setMonth={setMonth} setIncome={setIncome} setNote={setNote} onAdd={onAdd} onClose={()=>setIsMonthForm(false)} isEdit={isEdit} />}
                 <div className='header'>
-                    <input type='text' placeholder='Search by month..' value={searchText} onChange={(e)=>setSearchtext(e.target.value)}/>
+                    <input type='text' placeholder='Search by month..'  onChange={(e)=>filterMonth(e.target.value)}/>
                 </div>
                 <div className='month_cards'>
                     {transactionMonths.map((transaction)=>{

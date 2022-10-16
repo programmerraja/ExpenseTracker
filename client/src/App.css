@@ -5,8 +5,7 @@
 :root{
 	--primary-color:#0ab377;
 	--secondary-color:#152251;
-  --secondary-color-light:#727272;
-  --secondary-color-lightr:rgba(24,32,69,0.7);
+  --secondary-color-light:rgba(24,32,69,0.7);
   --secondary-color-input:#152248;
   --font-color: white;
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -16,8 +15,8 @@
 }
 
 body {
-  background-color: white;
- 
+  background-color: var(--secondary-color);
+  color: var(--font-color);
   font-family: 'Lato', sans-serif;
   /* color: var(--font-color); */
 }

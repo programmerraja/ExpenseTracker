@@ -4,6 +4,8 @@
     padding: 0.5rem;
     box-shadow: var(--box-shadow);
     background-color: white;
+    /* background-color: var(--secondary-color-input); */
+
 }
 .TransactionFormType{
     display: flex;
@@ -14,9 +16,10 @@
     cursor: pointer;
     width: 48%;
     transition: all 1s;
+    color: black;
 }
 .selected{
-    background-color: #6d71e8;
+    background-color: var(--primary-color);
 
 }
 .TransactionFormValue{
